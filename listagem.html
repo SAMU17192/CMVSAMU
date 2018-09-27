@@ -1,0 +1,80 @@
+<html>
+<head>
+ <meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="bulma/css/bulma.css">
+<link rel="stylesheet" type="text/css" href="font/css/fontawesome-all.css">
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/geturi.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="select/css/normalize.css" />
+ 	<link rel="stylesheet" type="text/css" href="css/estilo.css">
+    <link rel="stylesheet" type="text/css" href="select/css/cs-select.css" />
+    <link rel="stylesheet" type="text/css" href="select/css/cs-skin-rotate.css" />
+    <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css"
+    integrity="sha384-OHBBOqpYHNsIqQy8hL1U+8OXf9hH6QRxi0+EODezv82DfnZoV7qoHAZDwMwEJvSw"
+    crossorigin="anonymous">
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"
+    integrity="sha384-OHBBOqpYHNsIqQy8hL1U+8OXf9hH6QRxi0+EODezv82DfnZoV7qoHAZDwMwEJvSw"
+    crossorigin="anonymous">
+    <script type="text/javascript">
+    	$(document).ready(function(){
+    		var id = getUrlVars()["id"];
+    		 $.ajax({
+              url: 'http://127.0.0.1/TCC/webservice.php',
+			        method: "POST",
+			        data: {"tipo" : "listakm", "id" : id},
+              success: function(data) {                               		
+              	 var json = $.parseJSON(data);
+              	 $("#kminicial").val(json.kmveiculo +' Km');            	               	 
+              },              
+              timeout: 3000,    
+              error: function(){
+	    		alert("Erro ao fazer a requisição");
+  			  }              
+		});
+         
+         }
+         
+    	});
+    </script>
+  <title></title>
+</head>
+<body>
+<nav class=" nav justify-content-center navbar navbar-expand-lg navbar-light bg-danger">
+<ul class="nav justify-content-center">
+  <li class="nav-item">
+  <a class="navbar-brand" style="color:white;padding-top: 0.6rem;"><i class="animated bounceInLeft slower fas fa-ambulance" style="font-size:1.5rem;"></i> <b>CMV-SAMU</b></a>
+</li>
+</ul>
+</nav>
+<br>
+<br>
+<br>
+<div class="animated zoomInDown card" style="margin: 2rem 2rem 2rem 2rem;">
+<div class="card-body">
+
+  
+</div>
+</div>
+
+<footer class="footer bg-danger" >
+      <div class="content has-text-centered">
+      <div class="row">
+          <div class="col md-4 " style="">
+            <strong style="color:white;">Alex</strong>
+          </div>
+          <div class="col md-4">
+            <strong style="color:white;">Gustavo</strong>
+          </div>
+          <div class="col md-4">
+            <strong style="color:white;">Samuel</strong>
+          </div>
+        </div> 
+    </div>
+  </footer>
+</body>
+</html>
