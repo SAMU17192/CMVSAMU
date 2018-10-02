@@ -39,8 +39,8 @@
   <div class="card-body">
   
     
-      <label class="select-label"> <i class="fas fa-ambulance" style="color:red; "></i> Selecione a Ambulância: </label>
-      <select class="cs-select cs-skin-rotate" name="select" id="select">
+      <label class="select-label"> <i class="fas fa-ambulance" style="color:red; "></i> Selecione a Ambulância: </label><br>
+      <select class="cs-select cs-skin-rotate" name="select" id="select" style="">
 
       </select>
     </div><br>
@@ -48,6 +48,7 @@
 <br>
 
     <button type="button" id="btnselect" class="btn btn-danger"><p class="">Selecionar</p></button>
+
   </div>
 
 
@@ -77,7 +78,7 @@
             {
               
               
-              acumul += '<option value="'+json[i].idveiculo+'">'+json[i].nomeveiculo +'</option>';
+              acumul += '<option value="'+json[i].idveiculo+'"><i class="fas fa-ambulance"></i>'+json[i].nomeveiculo +'</option>';
           
           
             }
