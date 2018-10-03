@@ -51,9 +51,47 @@
 </ul>
 </nav>
 <br>
-<div class="animated zoomInDown card" style="margin: 2rem 2rem 2rem 2rem;">
+<br>
+<div class="card" id="listar" style="display:none;margin: 2rem 2rem 2rem 2rem;">
+  <div class="table table-responsive table-dark">
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td colspan="2">Larry the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+  </table>
+</div>
 <div class="card-body">
-  <center><br><button type="button" class="btn btn-danger " id="btntela">3° Tela</button></center>
+</div>
+</div>
+
+
+<div class="animated zoomInDown card" id="atualizar" style="margin: 2rem 2rem 2rem 2rem;">
+<div class="card-body">
+
   <br>
 <div class="input-group">
   <div class="input-group-prepend">
@@ -152,19 +190,41 @@
 <footer class="bg-danger" style="height: 7rem!important;padding: 1rem">
       <div class="container">
       <div class="row">
-      <button class="bg-danger btn-outline-dark" onclick=""><div class="col md-4">
+      <button class="bg-danger btn-outline-dark" id="pagatualizar"><div class="col md-4">
           <center><strong style="color:white;font-size: 3rem;"><i class="fas fa-edit"></i></strong><br>
             <strong style="color:white;font-size:0.8rem;">Atualizar KM</strong></center>
           </div></button>
           <div class="col md-4 " style="">
           </div>
           
-          <button class="bg-danger btn-outline-muted" onclick=""><div class="col md-4">
+          <button class="bg-danger btn-outline-muted" id="listagem"><div class="col md-4">
             <center><strong style="color:white;font-size: 3rem;"><i class="fas fa-wrench"></i></strong><br>
             <strong style="color:white;font-size:0.8rem;">Consulta De <br>Peças</strong></center>
           </div></button>
         </div> 
     </div>
   </footer>
+  <script type="text/javascript">
+  $("#listagem").click(function() {
+            $('#atualizar').removeClass('animated zoomInDown');
+            $('#atualizar').removeClass('animated bounceInLeft');
+           $('#atualizar').addClass('animated bounceOutLeft');  
+          setTimeout(function() {$("#atualizar").css("display","none");},600);
+          $('#listar').removeClass('animated bounceOutRight');
+          setTimeout(function() {$("#listar").css("display","block");},500);
+          $('#listar').addClass('animated bounceInRight');
+
+        });
+  $("#pagatualizar").click(function() {
+            $('#listar').removeClass('animated bounceInRight');
+           $('#listar').addClass('animated bounceOutRight');
+          setTimeout(function() {$("#listar").css("display","none");},600);
+
+          setTimeout(function() {$("#atualizar").css("display","block");},500);
+          $('#atualizar').removeClass('animated bounceOutLeft');
+          $('#atualizar').addClass('animated bounceInLeft');
+
+        });
+  </script>
 </body>
 </html>
