@@ -30,7 +30,7 @@
 			        data: {"tipo" : "listakm", "id" : id},
               success: function(data) {                               		
               	 var json = $.parseJSON(data);
-              	 $("#kminicial").val(json.kmveiculo +' Km');            	               	 
+              	 $("#kminicial").val(json.KmVeiculo +' Km');            	               	 
               },              
               timeout: 3000,    
               error: function(){
@@ -101,17 +101,20 @@
   <input type="text" class="form-control" id="kminicial" name="kminicial" style="text-align:center; " readonly>
   </div>
   <br>
+
   <div class="input-group">
   <div class="input-group-prepend">
     <span class="input-group-text bg-danger" style="color:#fff;text-align:center;">Km Final:</span>
 </div>
   <input type="number" class="form-control" id="kmfinal" name="kmfinal">
 </div>
+
 <br>
 <div id="alert" class="alert alert-danger bg-danger" role="alert" style="display:none;text-align:center;color:#fff;">
   Atualizado Com Sucesso
 </div>
 <br>
+
   <div class="input-group" id="texto" style="display:none; ">
   <div class="input-group-prepend">
     <span class="input-group-text bg-danger" style="color:#fff;text-align:center;">Km Rodados:</span>
@@ -159,7 +162,7 @@
               data: {"tipo" : "listakm", "id" : id},
               success: function(data) {                                   
                  var json = $.parseJSON(data);
-                 $("#kminicial").val(json.kmveiculo +' Km');                               
+                 $("#kminicial").val(json.KmVeiculo +' Km');                               
               },              
               timeout: 3000,    
               error: function(){
