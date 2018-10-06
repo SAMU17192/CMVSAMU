@@ -2,46 +2,37 @@
 <head>
  <meta charset="utf-8">
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-<link rel="stylesheet" type="text/css" href="bulma/css/bulma.css">
+
 <link rel="stylesheet" type="text/css" href="font/css/fontawesome-all.css">
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/bootstrap.js"></script>
 <script type="text/javascript" src="js/geturi.js"></script>
-
+<script type="text/javascript" src="js/requisicao.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="select/css/normalize.css" />
  	<link rel="stylesheet" type="text/css" href="css/estilo.css">
     <link rel="stylesheet" type="text/css" href="select/css/cs-select.css" />
     <link rel="stylesheet" type="text/css" href="select/css/cs-skin-rotate.css" />
-    <link rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css"
     integrity="sha384-OHBBOqpYHNsIqQy8hL1U+8OXf9hH6QRxi0+EODezv82DfnZoV7qoHAZDwMwEJvSw"
-    crossorigin="anonymous">
-    <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"
-    integrity="sha384-OHBBOqpYHNsIqQy8hL1U+8OXf9hH6QRxi0+EODezv82DfnZoV7qoHAZDwMwEJvSw"
-    crossorigin="anonymous">
-    <script type="text/javascript">
-    	$(document).ready(function(){
-    		var id = getUrlVars()["id"];
-    		 $.ajax({
+    <link rel="stylesheet" type="text/css" href="css/animate.css">
+    
+  <title></title>
+  <script type="text/javascript">
+    var id = getUrlVars()["id"];
+         $.ajax({
               url: 'http://127.0.0.1/TCC/webservice.php',
-			        method: "POST",
-			        data: {"tipo" : "listakm", "id" : id},
-              success: function(data) {                               		
-              	 var json = $.parseJSON(data);
-              	 $("#kminicial").val(json.KmVeiculo +' Km');            	               	 
+              method: "POST",
+              data: {"tipo" : "listakm", "id" : id},
+              success: function(data) {                                   
+                 var json = $.parseJSON(data);
+                 $("#kminicial").val(json.KmVeiculo +' Km');                               
               },              
               timeout: 3000,    
               error: function(){
-	    		alert("Erro ao fazer a requisição");
-  			  }              
-		});
-
-         
-    	});
-    </script>
-  <title></title>
+          alert("Erro ao fazer a requisição");
+          }
+          });
+  </script>
 </head>
 <body>
 <nav class=" nav justify-content-center navbar navbar-expand-lg navbar-light bg-danger">
@@ -54,43 +45,27 @@
 <br>
 <br>
 <div class="card" id="listar" style="display:none;margin: 2rem 2rem 2rem 2rem;">
-  <div class="table table-responsive table-dark">
-  <table class="table">
+  <br>
+  <div id="tabela">
+  <h2 class="text-danger" align="center">Peças Desgastadas</h2>
+  <table class="table table-striped" align="center">
     <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+    <tr class="bg-danger text-light" style="text-align: center;">
+      <th scope="col">Peça</th>
     </tr>
   </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
+  <tbody id="ConsultaPeca" style="">
+    
   </tbody>
   </table>
-</div>
+  </div>
+<h2 class="text-danger" align="center" style="display: none;padding: 1rem;" id="nd">Sem Peças Desgastadas</h2>
 <div class="card-body">
 </div>
 </div>
 
 
-<div class="" id="atualizar" style="margin: 2rem 2rem 2rem 2rem;">
+<div class="card" id="atualizar" style="margin: 2rem 2rem 2rem 2rem;">
 <div class="card-body">
 
   <br>
@@ -126,121 +101,29 @@
 </div>
 </div>
 <script type="text/javascript">
-  var kmg;
-  var kmf;
-  $("#kmfinal").keyup(function(){    
-    kmf = parseFloat($("#kmfinal").val());
-    var kmi = parseFloat($("#kminicial").val());
-    var km; 
-    var qtd = kmf.length;
-    $('#kmrodados').val('0 Km');
-    $('#btnat').hide();
-    if(kmf>kmi){  
-     $('#texto').show();
-     $('#btnat').show();
-     km  = kmf - kmi;
-     kmg  = kmf - kmi;
-      $("#kmrodados").val(km+" Km");
-    }
-    else
-    {
-     $("#kmrodados").val(); 
-    }
-  });
-  $("#btnat").click(function(){    
-    var id = getUrlVars()["id"];
-    
-         $.ajax({
-              url: 'http://127.0.0.1/TCC/webservice.php',
-              method: "POST",
-               data: {"tipo" : "atualizarkm", "id" : id, "km" : kmg},
-              success: function(data) {
-                var id = getUrlVars()["id"];
-                $.ajax({
-              url: 'http://127.0.0.1/TCC/webservice.php',
-              method: "POST",
-              data: {"tipo" : "listakm", "id" : id},
-              success: function(data) {                                   
-                 var json = $.parseJSON(data);
-                 $("#kminicial").val(json.KmVeiculo +' Km');                               
-              },              
-              timeout: 3000,    
-              error: function(){
-              alert("Erro ao fazer a requisição");
-                }              
-              });          
-              },              
-              timeout: 3000,    
-              error: function(){
-          alert("Erro ao fazer a requisição");
-          }              
-    });
-         $('#texto').hide();
-         $('#btnat').hide();
-         $("#kmfinal").val("");
-         
-         $("#alert").css("display","block");
-
-         $('#alert').addClass('animated bounceIn');
-         setTimeout(function() {$('#alert').removeClass('animated bounceIn');}, 1000);
-         setTimeout(function() {$("#alert").css("display","none");}, 2500);
-         });
-        $("#btntela").click(function(){
-         var valor = getUrlVars()["id"];
-         window.location.href = "listagem.html?id="+valor;
-       });
+  
 
 </script>
-<footer class="bg-danger" style="height: 5rem!important;padding: 1rem">
+<footer class="bg-danger" style="height: 5rem!important;padding: 1rem;display: fixed;">
       <div class="container">
       <div class="row">
-	<div class="col md-6">
+	<div class="col md-4">
           <a class="bg-danger" id="pagatualizar" style="border-style:fixed;border-radius: 1rem;"><center><strong style="color:white;font-size: 2rem;"><i class="fas fa-edit"></i></strong><br>
             <strong style="color:white;font-size:0.8rem;">Atualizar</strong></center>
           </a></div>
-          <div class="col md-0 " style="">
+          <div class="col md-4 " style="">
+            <a class="bg-danger" id="sair" style="border-style:fixed;border-radius: 1rem;"><center><strong style="color:white;font-size: 2rem;"><i class="far fa-circle"></i></strong><br>
+            <strong style="color:white;font-size:0.8rem;">Sair</strong></center>
+          </a>
+            
           </div>
           
-          <div class="col md-6"><center><a class="bg-danger" id="listagem" style="border-radius: 1rem;">
+          <div class="col md-4"><center><a class="bg-danger" id="listagem" style="border-radius: 1rem;">
             <center><strong style="color:white;font-size: 2rem;"><i class="fas fa-wrench"></i></strong><br>
             <strong style="color:white;font-size:0.8rem;">Consulta</strong></center>
           </center></a></div>
         </div> 
     </div>
   </footer>
-  <script type="text/javascript">
-/*
-  var largura, altura;
-
-  $(document).ready(function(){
-
-  	altura = $(window).height();
-  	largura = $(window).width();
-
-  });
-*/
-  $("#listagem").click(function() {
-            $('#atualizar').fadeOut('fast',function(){
-            $('#listar').fadeIn('fast');
-            });  
-          //setTimeout(function() {$("#atualizar").css("display","none");},200);
-          
-           // setTimeout(function() {$("#listar").css("display","block");},500);
-          // $('#listar').show();          
-             
-        });
-  $("#pagatualizar").click(function() {
-  	$('#listar').slideUp('fast',function(){
-           	$('#atualizar').slideDown('fast');
-           });
-            // $('#listar').hide();  
-          // setTimeout(function() {$("#listar").css("display","none");},200);
-          
-          // setTimeout(function() {$("#atualizar").css("display","block");},500);
-          // $('#atualizar').show();                    
-          
-
-        });
-  </script>
 </body>
 </html>
