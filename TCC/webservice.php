@@ -12,7 +12,7 @@ $tipo = $_POST["tipo"];
 
 		if($tipo == "listakm"){
 			$id = $_POST['id'];
-			$consultar = mysqli_query($conexao,"select * from veiculos where IdVeiculo = $id ");	
+			$consultar = mysqli_query($conexao,"select * from trocas where IdVeiculo = $id ");	
 			$dados = mysqli_fetch_assoc($consultar);		
 			$json = json_encode($dados, JSON_UNESCAPED_UNICODE);
 			echo $json;		
@@ -32,7 +32,7 @@ $tipo = $_POST["tipo"];
   			$km = $_POST['km'];
   			$id = $_POST['id'];
   		
-			$sql="UPDATE veiculos SET KmVeiculo = KmVeiculo + $km WHERE IdVeiculo = $id";
+			$sql="UPDATE trocas SET KmAtual = KmAtual + $km WHERE IdVeiculo = $id";
 			$dados = mysqli_query($conexao, $sql);
 		}
 		else if($tipo == "consultapeca"){

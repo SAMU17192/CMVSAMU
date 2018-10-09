@@ -37,7 +37,7 @@ $(document).ready(function(){
               data: {"tipo" : "listakm", "id" : id},
               success: function(data) {                                   
                  var json = $.parseJSON(data);
-                 $("#kminicial").val(json.KmVeiculo +' Km');                               
+                 $("#kminicial").val(json.KmAtual +' Km');                               
               },              
               timeout: 3000,    
               error: function(){
@@ -107,19 +107,24 @@ $(document).ready(function(){
                     kmf = data[i].KmAtual - data[i].KmTroca;
                     resultado = 100 - ((kmf/data[i].KmLimiite)*100);
 
+
                     if (resultado<=5) {
+                      alert(resultado);
                     acumul += '<tr  style="text-align: center;">';
                     acumul += '<td>'+data[i].NomePeca+'</td>';             
                     acumul += '</tr>';
+
                   }
                   else{
                     $("#tabela").hide("slow");
                     $("#nd").show("slow");
 
+
                   }
+                  $("#ConsultaPeca").append(acumul);
               }
             //Adicionando conteúdo acumulado no DIV Resultado
-            $("#ConsultaPeca").append(acumul);                        
+                                    
               },              
               timeout: 3000,    
               error: function(){
